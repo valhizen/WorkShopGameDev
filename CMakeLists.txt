@@ -14,6 +14,14 @@ project ("WorkShopGameDev")
 # Find the packages
 find_package(OpenGL REQUIRED)
 
+if(WIN32)
+    set(SDL3_DIR "${CMAKE_SOURCE_DIR}/external/sdl/cmake")
+elseif(UNIX)
+    set(SDL3_DIR "/usr/lib/cmake/SDL3")
+endif()
+find_package(SDL3 REQUIRED)
+
+
 # External sources
 set(GLAD_DIR "${CMAKE_SOURCE_DIR}/external/glad")
 set(GLAD_SOURCE ${GLAD_DIR}/src/glad.c)
@@ -37,14 +45,8 @@ target_include_directories(CommonSettings INTERFACE
     ${GLAD_DIR}/include
     ${GLM_DIR}
 )
-target_link_libraries(CommonSettings INTERFACE OpenGL::GL)
+target_link_libraries(CommonSettings INTERFACE OpenGL::GL SDL3::SDL3)
 target_compile_features(CommonSettings INTERFACE cxx_std_20)
-
-if(WIN32)
-    # TODO: ADD TARGET HERE
-elseif(UNIX)
-    target_link_libraries(CommonSettings INTERFACE "${CMAKE_SOURCE_DIR}/external/sdl/lib/libSDL3.so.0.4.10")
-endif()
 
 # Add source to this project's executable.
 
