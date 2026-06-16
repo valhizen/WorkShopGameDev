@@ -113,8 +113,8 @@ int main()
 
 
     Shader playerShader;
-    playerShader.loadShader("../shaders/vert.glsl",
-                            "../shaders/frag.glsl");
+    playerShader.loadShader("../../../shaders/vert.glsl",
+                            "../../../shaders/frag.glsl");
     playerShader.compileShader();
 
     unsigned int VAO;
